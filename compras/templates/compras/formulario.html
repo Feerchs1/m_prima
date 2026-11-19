@@ -1,0 +1,23 @@
+<form method="POST">
+    {% csrf_token %}
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    
+    <label>Empresa:</label>
+    <input type="text" name="empresa" required>
+
+    <label>Producto:</label>
+    <select name="producto">
+        {% for p in productos %}
+            <option value="{{ p.id }}">{{ p.nombre }} (${{ p.precio }})</option>
+        {% endfor %}
+    </select>
+
+    <label>Cantidad:</label>
+    <input type="number" name="cantidad" min="1" required>
+
+    <button type="submit">Comprar</button>
+</form>
